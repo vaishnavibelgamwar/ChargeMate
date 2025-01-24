@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChargeMate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, #f9f9f9, #cce7ff);
+            overflow-x: hidden;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: #f3f3f3;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+        .header h1 img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+        .nav {
+            display: flex;
+            gap: 20px;
+        }
+        .nav a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        .nav a:hover {
+            color: #008cba;
+        }
+        .content {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 40px;
+        }
+        .truck-section img {
+            max-width: 100%;
+            height: auto;
+        }
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .feature {
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            flex: 1 1 200px;
+            max-width: 300px;
+            transition: transform 0.3s;
+        }
+        .feature:hover {
+            transform: translateY(-10px);
+        }
+        .feature h2 {
+            font-size: 1.5rem;
+            color: #555;
+        }
+        .feature p {
+            color: #777;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #008cba;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        .button:hover {
+            background: #005f73;
+        }
+        .charge-calculator {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .route-optimizer {
+            margin-top: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVDKZvtLSAlj1ri5ESY-uNa5BIAlDdZguYbQ&s" alt="Logo">ChargeMate</h1>
+        <nav class="nav">
+            <a href="#">Home</a>
+            <a href="#">About Us</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+        </nav>
+        
+    </div>
+    <h3>   Your ultimate partner in logistics pricing </h3>
+    <div class="content">
+        <div class="truck-section">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMG5V9VZcaSr8NaYRtF_Llv5TseczZfUz5Xg&s" alt="Courier Truck">
+        </div>
+        <div class="features">
+            <div class="feature">
+                <h2>Charge Calculator</h2>
+                <p>Get an estimated cost for your shipment based on weight and distance.</p>
+                <!-- Updated Charge Calculator Button -->
+                <a href="chargec.html" class="button">Calculate</a>
+            </div>
+            <div class="feature">
+                <h2>Customer Analytics</h2>
+                <p>Track and analyze customer data to improve service quality.</p>
+                <a href="Dashboard.html" class="button">Analyse</a>
+            </div>
+            <div class="feature">
+                <h2>Route Optimizer</h2>
+                <p>Plan the best routes to ensure timely delivery and save fuel.</p>
+                <a href="#" class="button">Optimize Now</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add any interactivity if needed
+        document.querySelectorAll('.feature').forEach(feature => {
+            feature.addEventListener('click', () => {
+                alert(`Clicked on ${feature.querySelector('h2').textContent}`);
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESG Scoring</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e4f8d6; /* Light green background */
+            color: #000; /* Black text */
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #112d08; /* Dark green background */
+            color: #fff; /* White text */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        header .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        header .logo span {
+            font-size: 28px;
+            margin-right: 10px;
+        }
+
+        header nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        header nav a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        header nav a:hover {
+            color: #e4f8d6; /* Light green on hover */
+        }
+
+        header .actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        header .actions a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        header .actions .button {
+            background-color: #fff;
+            color: #112d08;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Breadcrumb Styles */
+        .breadcrumb {
+            padding: 10px 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .breadcrumb a {
+            color: #112d08;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Content Styles */
+        .content {
+            padding: 20px;
+        }
+
+        .content h1 {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <span>👑</span>
+            Calculator
+        </div>
+        <nav>
+            <a href="#">About</a>
+            <a href="#">ESG</a>
+            <a href="#">Industries</a>
+            <a href="#">Managed Services</a>
+            <a href="#">Our Technology</a>
+            <a href="#">Reporting</a>
+            <a href="#">Resources</a>
+        </nav>
+        <nav>
+            <a href="#">Login / Signup</a>
+
+
+        </nav>
+    </header>
+ 
+    <div class="left">
+        HOME > <a href="#">ESG</a>
+    </div>
+    <div class="content">
+        <h1>ESG Scoring: How It’s Done, Ways to Improve Yours, and Why it Matters</h1>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQF6QliApnoCDwqLzRmQYccpI-EXNAf-5vy8g&s"width="500" height="300">
+    </div>
+    
+</body>
+</html> -->

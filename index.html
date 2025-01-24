@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  
+</head>
+<style >
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f4fc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-container {
+  width: 900px;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.login-box {
+  display: flex;
+  width: 100%;
+}
+
+.form-section {
+  flex: 1;
+  padding: 40px;
+  border-right: 2px solid #f0f4fc;
+}
+
+.form-section h2 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.options a {
+  font-size: 14px;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.options a:hover {
+  text-decoration: underline;
+}
+
+.btn-login {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #008cba;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+.btn-login:hover {
+  background-color: #0056b3;
+}
+
+.signup-link {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #666;
+}
+
+.signup-link a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}
+
+.illustration-section {
+  flex: 1;
+  padding: 40px;
+  text-align: center;
+  background-color: #f0f4fc;
+  border-radius: 0 15px 15px 0;
+}
+
+.illustration-section h3 {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.illustration-section p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.illustration-section img {
+  width: 100%;
+  max-height: 500px;
+}
+
+</style>
+<body>
+  <div class="login-container">
+    <div class="login-box">
+      <!-- Login Form Section -->
+      <div class="form-section">
+        <h2>Login</h2>
+        <form>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Enter your email" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter your password" required>
+          </div>
+          <div class="options">
+            <label>
+              <input type="checkbox">
+              Remember me
+            </label>
+            <a href="#">Forgot password?</a>
+          </div>
+          <a href="home.html" class="button">Login</a>
+          
+        </form>
+        <p class="signup-link">Don't have an account? <a href="#">Sign up</a></p>
+      </div>
+
+      <!-- Illustration Section -->
+      <div class="illustration-section">
+       
+        <img src="log.webp">
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>function redirectToHome(event) {
+        event.preventDefault(); // Prevent the default form submission behavior
+        window.location.href = "home.html"; // Redirect to the home screen page
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHvLJ2leJFm9xpU7xXpEeyIS0bqOo01ir2YA&s">
+        <div class="left">
+            <div class="headline">WELCOME !!</div>
+            <div class="subheadline">GAIL India Limited</div>
+            <div class="description">
+                Through technology and innovation, we are executing major capital projects designed to yield decades of energy.
+            </div>
+        </div>
+        <div class="right">
+            <form class="sign-in-form" onsubmit="redirectToHome(event);">
+                <input type="text" placeholder="User Name">
+                <div class="password-field">
+                    <input type="password" placeholder="Password">
+                    <span class="show-password">SHOW</span>
+                </div>
+                <label>
+                    <input type="checkbox"> Remember me
+                </label>
+                <button type="submit">Sign in</button>
+                <div class="forgot-password">
+                    <a href="#">Forgot Password?</a>
+                </div>
+                <div class="other-sign-in">
+                    Sign in with other
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</body>
+</html> -->

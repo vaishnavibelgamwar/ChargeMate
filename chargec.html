@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charge Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: #f3f3f3;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            width: 80%;
+            margin: 2rem auto;
+            background: #fff;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+
+        label {
+            display: block;
+            margin: 0.5rem 0 0.3rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #0078D7;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+        }
+
+        .vertical-image {
+            width: 350px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Charge Calculator</h2>
+        </div>
+        <div class="form-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuMHpTxLTnbEbn8zOQ0DfrKoVcYQzxYtBa2A&s" alt="Calculator Image" class="vertical-image">
+            <div class="form-section">
+                <form id="chargeForm">
+                    <label for="companyName">Company Name</label>
+                    <input type="text" id="companyName" placeholder="Enter company name" required>
+
+                    <label for="fromStation">From Station</label>
+                    <input type="text" id="fromStation" placeholder="Enter starting station" required>
+
+                    <label for="toStation">To Station</label>
+                    <input type="text" id="toStation" placeholder="Enter destination station" required>
+
+                    <label for="length">Length (m)</label>
+                    <input type="number" id="length" placeholder="Enter length" required>
+
+                    <label for="breadth">Breadth (m)</label>
+                    <input type="number" id="breadth" placeholder="Enter breadth" required>
+
+                    <label for="height">Height (m)</label>
+                    <input type="number" id="height" placeholder="Enter height" required>
+
+                    <label for="weight">Weight (kg)</label>
+                    <input type="number" id="weight" placeholder="Enter weight" required>
+
+                    <label for="distance">Distance (km)</label>
+                    <input type="number" id="distance" placeholder="Enter distance" required>
+
+                    <label for="quantity">Quantity</label>
+                    <input type="number" id="quantity" placeholder="Enter quantity" required>
+
+                    <label for="discount">Discount (%)</label>
+                    <input type="number" id="discount" placeholder="Enter discount" required>
+
+                    <button type="button" id="calculateButton">Calculate</button>
+                </form>
+            </div>
+        </div>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUFVeahaNxuOSn-_pbtBKHQgRE4JG6urpGqaMxwWPmbOW-BsG7ROT6pfVFZYhi4pYNH_E&usqp=CAU" alt="Boxes Image" class="vertical-image">
+    </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("calculateButton").addEventListener("click", function () {
+            const companyName = document.getElementById("companyName").value;
+            const fromStation = document.getElementById("fromStation").value;
+            const toStation = document.getElementById("toStation").value;
+            const length = parseFloat(document.getElementById("length").value);
+            const breadth = parseFloat(document.getElementById("breadth").value);
+            const height = parseFloat(document.getElementById("height").value);
+            const weight = parseFloat(document.getElementById("weight").value);
+            const distance = parseFloat(document.getElementById("distance").value);
+            const quantity = parseFloat(document.getElementById("quantity").value);
+            const discount = parseFloat(document.getElementById("discount").value);
+
+            const volume = length * breadth * height;
+            const baseCharge = (volume + weight) * (distance * quantity);
+            const discountedCharge = baseCharge - (baseCharge * discount / 100);
+
+            const resultPage = `
+            <html>
+            <head>
+                <title>Charge Results</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        background-color: #f4f4f9;
+                        text-align: center;
+                        padding: 20px;
+                    }
+
+                    .result-container {
+                        margin: auto;
+                        background: white;
+                        padding: 20px;
+                        border-radius: 8px;
+                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    }
+
+                    .highlight {
+                        font-weight: bold;
+                        font-size: 1.2em;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="result-container">
+                    <h2>Charge Results</h2>
+                    <p><span class="highlight">Company Name:</span> ${companyName}</p>
+                    <p><span class="highlight">From:</span> ${fromStation}</p>
+                    <p><span class="highlight">To:</span> ${toStation}</p>
+                    <p><span class="highlight">Volume:</span> ${volume.toFixed(2)} m³</p>
+                    <p><span class="highlight">Weight:</span> ${weight.toFixed(2)} kg</p>
+                    <p><span class="highlight">Total Charge:</span> ₹${baseCharge.toFixed(2)}</p>
+                    <p><span class="highlight">Discounted Charge:</span> ₹${discountedCharge.toFixed(2)}</p>
+                </div>
+            </body>
+            </html>`;
+
+            const newWindow = window.open("", "_blank");
+            newWindow.document.open();
+            newWindow.document.write(resultPage);
+            newWindow.document.close();
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charge Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: #f3f3f3;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            width: 80%;
+            margin: 2rem auto;
+            background: #fff;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+
+        label {
+            display: block;
+            margin: 0.5rem 0 0.3rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #0078D7;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+        }
+        
+
+        
+
+        .form-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .form-section {
+            flex: 1;
+            margin: 20px;
+        }
+
+        .form-section form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        } */
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .vertical-image {
+            width:350px;
+            height: auto;
+        }
+
+        .highlight {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .result-section {
+            display: none;
+        }
+
+        .visible {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class=" header">
+            <h2>Charge Calculator</h2>
+        </div>
+        <div class="form-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuMHpTxLTnbEbn8zOQ0DfrKoVcYQzxYtBa2A&s" alt="Calculator Image" class="vertical-image">
+            <div class="form-section">
+                
+                <form id="chargeForm">
+                    <label for="companyName">Company Name</label>
+                    <input type="text" id="companyName" placeholder="Enter company name" required>
+
+                    <label for="fromStation">From Station</label>
+                    <input type="text" id="fromStation" placeholder="Enter starting station" required>
+
+                    <label for="toStation">To Station</label>
+                    <input type="text" id="toStation" placeholder="Enter destination station" required>
+
+                    <label for="length">Length (m)</label>
+                    <input type="number" id="length" placeholder="Enter length" required>
+
+                    <label for="breadth">Breadth (m)</label>
+                    <input type="number" id="breadth" placeholder="Enter breadth" required>
+
+                    <label for="height">Height (m)</label>
+                    <input type="number" id="height" placeholder="Enter height" required>
+
+                    <label for="weight">Weight (kg)</label>
+                    <input type="number" id="weight" placeholder="Enter weight" required>
+
+                    <label for="distance">Distance (km)</label>
+                    <input type="number" id="distance" placeholder="Enter distance" required>
+
+                    <label for="quantity">Quantity</label>
+                    <input type="number" id="quantity" placeholder="Enter quantity" required>
+
+                    <label for="discount">Discount (%)</label>
+                    <input type="number" id="discount" placeholder="Enter discount" required>
+
+                    <button type="button" id="calculateButton">Calculate</button>
+                </form>
+            </div>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUFVeahaNxuOSn-_pbtBKHQgRE4JG6urpGqaMxwWPmbOW-BsG7ROT6pfVFZYhi4pYNH_E&usqp=CAU" alt="Boxes Image" class="vertical-image">
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("calculateButton").addEventListener("click", function() {
+            const companyName = document.getElementById("companyName").value;
+            const fromStation = document.getElementById("fromStation").value;
+            const toStation = document.getElementById("toStation").value;
+            const length = document.getElementById("length").value;
+            const breadth = document.getElementById("breadth").value;
+            const height = document.getElementById("height").value;
+            const weight = document.getElementById("weight").value;
+            const distance = document.getElementById("distance").value;
+            const quantity = document.getElementById("quantity").value;
+            const discount = document.getElementById("discount").value;
+
+            // const volume = length * breadth * height;
+            // const vw = volume+weight;
+            // const dq = distance * quantity;
+            // const baseCharge = vw * dq;
+            const baseCharge = ((length * breadth * height) + weight) * (distance * quantity) ; 
+            const discountedCharge = baseCharge - (baseCharge * discount / 100);
+
+            const resultPage = `<!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Charge Results</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        background-color: #f4f4f9;
+                        margin: 0;
+                        padding: 20px;
+                    }
+
+                    .result-container {
+                        max-width: 600px;
+                        margin: auto;
+                        background: white;
+                        padding: 20px;
+                        border-radius: 8px;
+                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                        text-align: center;
+                    }
+
+                    .highlight {
+                        font-weight: bold;
+                        font-size: 1.5em;
+                        color: #333;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="result-container">
+                    <h2>Charge Results</h2>
+                    <p><span class="highlight">Company Name:</span> ${companyName}</p>
+                    <p><span class="highlight">From:</span> ${fromStation}</p>
+                    <p><span class="highlight">To:</span> ${toStation}</p>
+                    <p><span class="highlight">Volume:</span> ${volume} m³</p>
+                    <p><span class="highlight">Weight:</span> ${weight} kg</p>
+                    <p><span class="highlight">Distance:</span> ${distance} km</p>
+                    <p><span class="highlight">Quantity:</span> ${quantity}</p>
+                    <p><span class="highlight">Total Charge:</span> ₹11223${baseCharge}</p>
+                    <p><span class="highlight">Discounted Charge:</span> ₹10774.08${discountedCharge}</p>
+                </div>
+            </body>
+            </html>`;
+
+            const newWindow = window.open();
+            newWindow.document.write(resultPage);
+        });
+    </script>
+</body>
+</html> -->
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charge Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            background-color: #0078D7;
+            color: white;
+            padding: 1rem 2rem;
+            text-align: center;
+        }
+
+        .container {
+            width: 80%;
+            margin: 2rem auto;
+            background: #fff;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+
+        label {
+            display: block;
+            margin: 0.5rem 0 0.3rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #0078D7;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Charge Calculator</h1>
+</header>
+
+<div class="container">
+    <form id="chargeForm">
+        <label for="companyName">Company Name:</label>
+        <input type="text" id="companyName" required>
+
+        <label for="fromStation">From Station:</label>
+        <input type="text" id="fromStation" required>
+
+        <label for="toStation">To Station:</label>
+        <input type="text" id="toStation" required>
+
+        <label for="length">Length (cm):</label>
+        <input type="number" id="length" required>
+
+        <label for="breadth">Breadth (cm):</label>
+        <input type="number" id="breadth" required>
+
+        <label for="height">Height (cm):</label>
+        <input type="number" id="height" required>
+
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight" required>
+
+        <label for="distance">Distance (km):</label>
+        <input type="number" id="distance" required>
+
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" required>
+
+        <label for="discount">Discount (%):</label>
+        <input type="number" id="discount" required>
+
+        <button type="button" onclick="calculateCharges()">Calculate</button>
+    </form>
+</div>
+
+<script>
+    function calculateCharges() {
+        const companyName = document.getElementById('companyName').value;
+        const fromStation = document.getElementById('fromStation').value;
+        const toStation = document.getElementById('toStation').value;
+        const length = parseFloat(document.getElementById('length').value);
+        const breadth = parseFloat(document.getElementById('breadth').value);
+        const height = parseFloat(document.getElementById('height').value);
+        const weight = parseFloat(document.getElementById('weight').value);
+        const distance = parseFloat(document.getElementById('distance').value);
+        const quantity = parseInt(document.getElementById('quantity').value);
+        const discount = parseFloat(document.getElementById('discount').value);
+
+        const volume = length * breadth * height;
+        const baseCharge = (volume * weight * distance * quantity) / 1000;
+        const discountedCharge = baseCharge - (baseCharge * discount / 100);
+
+        const resultWindow = window.open('', '_blank', 'width=600,height=400');
+        resultWindow.document.write(`
+            <html>
+                <head>
+                    <title>Result</title>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            background-color: #f4f4f9;
+                            padding: 2rem;
+                        }
+
+                        .result-container {
+                            background: #fff;
+                            padding: 2rem;
+                            border-radius: 8px;
+                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                            text-align: center;
+                        }
+
+                        h2 {
+                            color: #0078D7;
+                        }
+
+                        p {
+                            font-size: 1.2rem;
+                            margin: 0.5rem 0;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="result-container">
+                        <h2>Calculation Results</h2>
+                        <p><strong>Company Name:</strong> ${companyName}</p>
+                        <p><strong>From Station:</strong> ${fromStation}</p>
+                        <p><strong>To Station:</strong> ${toStation}</p>
+                        <p><strong>Dimensions (LxBxH):</strong> ${length} x ${breadth} x ${height} cm</p>
+                        <p><strong>Weight:</strong> ${weight} kg</p>
+                        <p><strong>Distance:</strong> ${distance} km</p>
+                        <p><strong>Quantity:</strong> ${quantity}</p>
+                        <p><strong>Discount:</strong> ${discount}%</p>
+                        <h3>Total Charges: ₹${baseCharge.toFixed(2)}</h3>
+                        <h3>Discounted Charges: ₹${discountedCharge.toFixed(2)}</h3>
+                    </div>
+                </body>
+            </html>
+        `);
+    }
+</script>
+
+</body>
+</html>
+ -->
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charge Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, #f9f9f9, #cce7ff);
+            overflow-x: hidden;
+        }
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: #f3f3f3;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            color: #333;
+        }
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+        .form {
+            background: #fff;
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+        .form label {
+            font-weight: 600;
+            margin-top: 15px;
+            display: block;
+            color: #555;
+        }
+        .form input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .form button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: #008cba;
+            color: #fff;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .form button:hover {
+            background: #005f73;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            background: #e7f5ff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-size: 1.2rem;
+            color: #333;
+        }
+    </style>
+    <script>
+        function calculateCharges(event) {
+            event.preventDefault();
+
+            const company = document.getElementById('company').value;
+            const from = document.getElementById('from').value;
+            const to = document.getElementById('to').value;
+            const length = parseFloat(document.getElementById('length').value);
+            const breadth = parseFloat(document.getElementById('breadth').value);
+            const height = parseFloat(document.getElementById('height').value);
+            const quantity = parseInt(document.getElementById('quantity').value);
+            const discount = parseFloat(document.getElementById('discount').value);
+
+            const volume = length * breadth * height;
+            const totalCharges = volume * quantity * 0.5; // Example rate per unit volume
+            const discountedCharges = totalCharges * (1 - discount / 100);
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+                <p><strong>Company Name:</strong> ${company}</p>
+                <p><strong>From Station:</strong> ${from}</p>
+                <p><strong>To Station:</strong> ${to}</p>
+                <p><strong>Length:</strong> ${length} cm</p>
+                <p><strong>Breadth:</strong> ${breadth} cm</p>
+                <p><strong>Height:</strong> ${height} cm</p>
+                <p><strong>Quantity:</strong> ${quantity}</p>
+                <p><strong>Discount:</strong> ${discount}%</p>
+                <p><strong>Total Charges:</strong> ₹${totalCharges.toFixed(2)}</p>
+                <p><strong>Discounted Charges:</strong> ₹${discountedCharges.toFixed(2)}</p>
+            `;
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <h1>Charge Calculator</h1>
+    </div>
+
+    <div class="form-container">
+        <form class="form" onsubmit="calculateCharges(event)">
+            <label for="company">Company Name</label>
+            <input type="text" id="company" name="company" placeholder="Enter company name" required>
+
+            <label for="from">From Station</label>
+            <input type="text" id="from" name="from" placeholder="Enter from station" required>
+
+            <label for="to">To Station</label>
+            <input type="text" id="to" name="to" placeholder="Enter to station" required>
+
+            <label for="length">Length (cm)</label>
+            <input type="number" id="length" name="length" placeholder="Enter length" required>
+
+            <label for="breadth">Breadth (cm)</label>
+            <input type="number" id="breadth" name="breadth" placeholder="Enter breadth" required>
+
+            <label for="height">Height (cm)</label>
+            <input type="number" id="height" name="height" placeholder="Enter height" required>
+
+            <label for="quantity">Quantity</label>
+            <input type="number" id="quantity" name="quantity" placeholder="Enter quantity" required>
+
+            <label for="discount">Discount (%)</label>
+            <input type="number" id="discount" name="discount" placeholder="Enter discount" required>
+
+            <button type="submit">Calculate</button>
+        </form>
+        <div id="result" class="result"></div>
+    </div>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charge Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, #f9f9f9, #cce7ff);
+            overflow-x: hidden;
+        }
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: #f3f3f3;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            color: #333;
+        }
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+        .form {
+            background: #fff;
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+        .form label {
+            font-weight: 600;
+            margin-top: 15px;
+            display: block;
+            color: #555;
+        }
+        .form input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .form button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: #008cba;
+            color: #fff;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .form button:hover {
+            background: #005f73;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Charge Calculator</h1>
+    </div>
+
+    <div class="form-container">
+        <form class="form">
+            <label for="company">Company Name</label>
+            <input type="text" id="company" name="company" placeholder="Enter company name">
+
+            <label for="from">From Station</label>
+            <input type="text" id="from" name="from" placeholder="Enter from station">
+
+            <label for="to">To Station</label>
+            <input type="text" id="to" name="to" placeholder="Enter to station">
+
+            <label for="length">Length (m)</label>
+            <input type="number" id="length" name="length" placeholder="Enter length">
+
+            <label for="breadth">Breadth (m)</label>
+            <input type="number" id="breadth" name="breadth" placeholder="Enter breadth">
+
+            <label for="height">Height (m)</label>
+            <input type="number" id="height" name="height" placeholder="Enter height">
+
+            <label for="quantity">Quantity</label>
+            <input type="number" id="quantity" name="quantity" placeholder="Enter quantity">
+
+            <label for="discount">Discount (%)</label>
+            <input type="number" id="discount" name="discount" placeholder="Enter discount">
+
+            <button type="submit">Calculate</button>
+        </form>
+    </div>
+</body>
+</html> -->
